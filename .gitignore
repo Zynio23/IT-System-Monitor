@@ -1,0 +1,9 @@
+# Plik wykonywalny naszego programu
+/monitor
+
+# Pliki systemowe macOS
+.DS_Store
+
+# Pliki tymczasowe
+*.o
+*.out
