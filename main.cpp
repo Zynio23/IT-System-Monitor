@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <limits>
+#include <cstdint> // Udostępnia typy liczb całkowitych o określonej liczbie bitów, np. uint64_t (64 bity bez znaku).
+
 using namespace std;
 
 // Klasa Computer
@@ -9,29 +11,31 @@ class Computer
 private:
     // Pola obiektu klasy Computer. Przechowuje w sekcji private, aby nie było mozliwosci, ze ktos będzie w stanie zmienic te dane
     string name;
-    int ramGB;
+    // wycofuje:
+    // int ramGB;
+    uint64_t ramBytes;
     string operatingSystem;
     int diskGB;
 
 public:
     // Konstruktor:
-    Computer(string newName, int newRamGB, string newOS, int newDiskGB);
+    Computer(string newName, uint64_t newRamBytes, string newOS, int newDiskGB);
     // Metody klasy Computer. Udostępnione w sekcji public. Do tych metod chce mieć dostęp.
     void ramStatus();
     void showInformation()
     {
         cout << "Nazwa Komputera: " << name << endl
              << "System: " << operatingSystem << endl
-             << "Pojemnosc RAM: " << ramGB << endl
+             << "Pojemnosc RAM: " << ramBytes / (1024 * 1024 * 1024) << "GiB" << endl
              << "Pojemnosc dysku: " << diskGB << endl;
     }
 };
 
 // Definicja konstruktora obiektu Computer, z przekazanymi parametrami
-Computer::Computer(string newName, int newRamGB, string newOS, int newDiskGB)
+Computer::Computer(string newName, uint64_t newRamBytes, string newOS, int newDiskGB)
 {
     name = newName;
-    ramGB = newRamGB;
+    ramBytes = newRamBytes;
     operatingSystem = newOS;
     diskGB = newDiskGB;
 }
@@ -82,7 +86,7 @@ int main()
         }
         case 3:
         {
-            Computer myComputer("MacBook", 8, "MacOS", 256);
+            Computer myComputer("MacBook", 8589934592ULL, "MacOS", 256);
             myComputer.showInformation();
             break;
         }
